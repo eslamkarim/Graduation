@@ -10,6 +10,11 @@
 #include "Gpio.h"
 #include "stdint.h"
 
+char Casting (int reg)
+{
+	return ( (*(volatile char*) reg));
+}
+
 void pin_direction (char base, char bin, char state )
 {
 	if (state == output)
@@ -64,7 +69,3 @@ void port_write (char base, char p )
 }
 
 
-char Casting (int reg)
-{
-	return ( (*(volatile char*) reg));
-}

@@ -11,6 +11,13 @@
 #include <util/delay.h>
 #include <avr/io.h>
 
+void Lcd_Enable()
+{
+	pin_write (RS_RW_E_port, E_bin ,1 );
+	_delay_us (1);
+	pin_write (RS_RW_E_port, E_bin ,0 );
+	_delay_us (1);
+}
 
 void Lcd_Init()
 {  
@@ -59,13 +66,7 @@ void Lcd_Init()
 	
 }
 
-void Lcd_Enable()
-{
-	pin_write (RS_RW_E_port, E_bin ,1 );
-	_delay_us (1);
-	pin_write (RS_RW_E_port, E_bin ,0 );
-	_delay_us (1);
-}
+
 
 void Write_Command(char Command)
 {   

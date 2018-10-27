@@ -17,17 +17,17 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   6 .debug_info   00000d00  00000000  00000000  000002f4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000003f2  00000000  00000000  00000ff4  2**0
+  7 .debug_abbrev 0000040c  00000000  00000000  00000ff4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   0000061f  00000000  00000000  000013e6  2**0
+  8 .debug_line   0000061f  00000000  00000000  00001400  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000188  00000000  00000000  00001a08  2**2
+  9 .debug_frame  00000188  00000000  00000000  00001a20  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    0000027b  00000000  00000000  00001b90  2**0
+ 10 .debug_str    0000027b  00000000  00000000  00001ba8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000004a1  00000000  00000000  00001e0b  2**0
+ 11 .debug_loc    000004a1  00000000  00000000  00001e23  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000000a0  00000000  00000000  000022ac  2**0
+ 12 .debug_ranges 000000a0  00000000  00000000  000022c4  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -82,52 +82,53 @@ Disassembly of section .text:
 00000078 <__bad_interrupt>:
   78:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
-0000007c <pin_write>:
+0000007c <Casting>:
+char pin_Read(char base,char bin)
+{
+	char t ;
+	t = Casting (base)  && (1<<bin);   
 	return t;
 }
+  7c:	fc 01       	movw	r30, r24
+  7e:	80 81       	ld	r24, Z
+  80:	08 95       	ret
 
-void port_write (char base, char p )
+00000082 <pin_write>:
+
+void pin_write (char base, char bin ,char p )
 {
-	(*(volatile char*) (base+2)) = p ;
-  7c:	41 11       	cpse	r20, r1
-  7e:	0d c0       	rjmp	.+26     	; 0x9a <pin_write+0x1e>
-  80:	e8 2f       	mov	r30, r24
-  82:	f0 e0       	ldi	r31, 0x00	; 0
-  84:	22 81       	ldd	r18, Z+2	; 0x02
-  86:	81 e0       	ldi	r24, 0x01	; 1
-  88:	90 e0       	ldi	r25, 0x00	; 0
-  8a:	02 c0       	rjmp	.+4      	; 0x90 <pin_write+0x14>
-  8c:	88 0f       	add	r24, r24
-  8e:	99 1f       	adc	r25, r25
-  90:	6a 95       	dec	r22
-  92:	e2 f7       	brpl	.-8      	; 0x8c <pin_write+0x10>
-  94:	82 2b       	or	r24, r18
-  96:	82 83       	std	Z+2, r24	; 0x02
-  98:	08 95       	ret
-  9a:	e8 2f       	mov	r30, r24
-  9c:	f0 e0       	ldi	r31, 0x00	; 0
-  9e:	22 81       	ldd	r18, Z+2	; 0x02
-  a0:	81 e0       	ldi	r24, 0x01	; 1
-  a2:	90 e0       	ldi	r25, 0x00	; 0
-  a4:	02 c0       	rjmp	.+4      	; 0xaa <pin_write+0x2e>
-  a6:	88 0f       	add	r24, r24
-  a8:	99 1f       	adc	r25, r25
-  aa:	6a 95       	dec	r22
-  ac:	e2 f7       	brpl	.-8      	; 0xa6 <pin_write+0x2a>
-  ae:	80 95       	com	r24
-  b0:	82 23       	and	r24, r18
-  b2:	82 83       	std	Z+2, r24	; 0x02
-  b4:	08 95       	ret
-
-000000b6 <Casting>:
-}
-
-
-char Casting (int reg)
-{
-	return ( (*(volatile char*) reg));
-  b6:	fc 01       	movw	r30, r24
-  b8:	80 81       	ld	r24, Z
+	if (p ==0)
+  82:	41 11       	cpse	r20, r1
+  84:	0d c0       	rjmp	.+26     	; 0xa0 <pin_write+0x1e>
+	set_bin ( (base+2) , bin);
+  86:	e8 2f       	mov	r30, r24
+  88:	f0 e0       	ldi	r31, 0x00	; 0
+  8a:	22 81       	ldd	r18, Z+2	; 0x02
+  8c:	81 e0       	ldi	r24, 0x01	; 1
+  8e:	90 e0       	ldi	r25, 0x00	; 0
+  90:	02 c0       	rjmp	.+4      	; 0x96 <pin_write+0x14>
+  92:	88 0f       	add	r24, r24
+  94:	99 1f       	adc	r25, r25
+  96:	6a 95       	dec	r22
+  98:	e2 f7       	brpl	.-8      	; 0x92 <pin_write+0x10>
+  9a:	82 2b       	or	r24, r18
+  9c:	82 83       	std	Z+2, r24	; 0x02
+  9e:	08 95       	ret
+	else
+	reset_bin ( (base+2) , bin);
+  a0:	e8 2f       	mov	r30, r24
+  a2:	f0 e0       	ldi	r31, 0x00	; 0
+  a4:	22 81       	ldd	r18, Z+2	; 0x02
+  a6:	81 e0       	ldi	r24, 0x01	; 1
+  a8:	90 e0       	ldi	r25, 0x00	; 0
+  aa:	02 c0       	rjmp	.+4      	; 0xb0 <pin_write+0x2e>
+  ac:	88 0f       	add	r24, r24
+  ae:	99 1f       	adc	r25, r25
+  b0:	6a 95       	dec	r22
+  b2:	e2 f7       	brpl	.-8      	; 0xac <pin_write+0x2a>
+  b4:	80 95       	com	r24
+  b6:	82 23       	and	r24, r18
+  b8:	82 83       	std	Z+2, r24	; 0x02
   ba:	08 95       	ret
 
 000000bc <Lcd_Enable>:
@@ -140,12 +141,12 @@ char Casting (int reg)
   bc:	41 e0       	ldi	r20, 0x01	; 1
   be:	62 e0       	ldi	r22, 0x02	; 2
   c0:	83 e3       	ldi	r24, 0x33	; 51
-  c2:	0e 94 3e 00 	call	0x7c	; 0x7c <pin_write>
+  c2:	0e 94 41 00 	call	0x82	; 0x82 <pin_write>
   c6:	00 00       	nop
   c8:	40 e0       	ldi	r20, 0x00	; 0
   ca:	62 e0       	ldi	r22, 0x02	; 2
   cc:	83 e3       	ldi	r24, 0x33	; 51
-  ce:	0e 94 3e 00 	call	0x7c	; 0x7c <pin_write>
+  ce:	0e 94 41 00 	call	0x82	; 0x82 <pin_write>
   d2:	00 00       	nop
   d4:	08 95       	ret
 
@@ -162,17 +163,17 @@ void Write_Data(char Data)
   da:	41 e0       	ldi	r20, 0x01	; 1
   dc:	60 e0       	ldi	r22, 0x00	; 0
   de:	83 e3       	ldi	r24, 0x33	; 51
-  e0:	0e 94 3e 00 	call	0x7c	; 0x7c <pin_write>
+  e0:	0e 94 41 00 	call	0x82	; 0x82 <pin_write>
 	pin_write (RS_RW_E_port,RW_bin ,0 );
   e4:	40 e0       	ldi	r20, 0x00	; 0
   e6:	61 e0       	ldi	r22, 0x01	; 1
   e8:	83 e3       	ldi	r24, 0x33	; 51
-  ea:	0e 94 3e 00 	call	0x7c	; 0x7c <pin_write>
+  ea:	0e 94 41 00 	call	0x82	; 0x82 <pin_write>
 	
 	t = Casting (Data_port+2); 
   ee:	82 e3       	ldi	r24, 0x32	; 50
   f0:	90 e0       	ldi	r25, 0x00	; 0
-  f2:	0e 94 5b 00 	call	0xb6	; 0xb6 <Casting>
+  f2:	0e 94 3e 00 	call	0x7c	; 0x7c <Casting>
 	t &= 0x0f;
   f6:	8f 70       	andi	r24, 0x0F	; 15
 	t |= (Data & 0xf0);

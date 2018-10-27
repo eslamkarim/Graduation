@@ -15,8 +15,9 @@
 #define D  0x30
 #define H  0xff
 
-#define input 1
+
 #define output 0
+#define input 1
 
 #define set_bin(reg,bit)   ( (*(volatile char*) reg) |= (1<<bit))
 #define reset_bin(reg,bit)  ( (*(volatile char*) reg) &=~ (1<<bit))

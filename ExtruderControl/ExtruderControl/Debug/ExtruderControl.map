@@ -283,11 +283,11 @@ END GROUP
                 0x00000078                __vector_20
                 0x0000007c                . = ALIGN (0x2)
  *(.text.*)
+ .text.Casting  0x0000007c        0x6 Gpio.o
+                0x0000007c                Casting
  .text.pin_write
-                0x0000007c       0x3a Gpio.o
-                0x0000007c                pin_write
- .text.Casting  0x000000b6        0x6 Gpio.o
-                0x000000b6                Casting
+                0x00000082       0x3a Gpio.o
+                0x00000082                pin_write
  .text.Lcd_Enable
                 0x000000bc       0x1a LCD_4bit.o
                 0x000000bc                Lcd_Enable
@@ -434,11 +434,11 @@ END GROUP
  .debug_info    0x00000242      0x968 LCD_4bit.o
  .debug_info    0x00000baa      0x156 main.o
 
-.debug_abbrev   0x00000000      0x3f2
+.debug_abbrev   0x00000000      0x40c
  *(.debug_abbrev)
- .debug_abbrev  0x00000000       0xf5 Gpio.o
- .debug_abbrev  0x000000f5      0x1d6 LCD_4bit.o
- .debug_abbrev  0x000002cb      0x127 main.o
+ .debug_abbrev  0x00000000      0x10f Gpio.o
+ .debug_abbrev  0x0000010f      0x1d6 LCD_4bit.o
+ .debug_abbrev  0x000002e5      0x127 main.o
 
 .debug_line     0x00000000      0x61f
  *(.debug_line .debug_line.* .debug_line_end)

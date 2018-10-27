@@ -16,8 +16,9 @@
 #define E_bin  2
 char t;
 
-void Lcd_Init();
+
 void Lcd_Enable();
+void Lcd_Init();
 void Write_Command(char Command);
 void Write_Data(char Data);
 void Write_String(char *S);
