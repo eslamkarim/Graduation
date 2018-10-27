@@ -1,0 +1,240 @@
+
+ExtruderControl.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000144  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  000001b8  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000001  00800060  00800060  000001b8  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000001b8  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000001e8  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 000000d0  00000000  00000000  00000224  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00000d00  00000000  00000000  000002f4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 000003f2  00000000  00000000  00000ff4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   0000061f  00000000  00000000  000013e6  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000188  00000000  00000000  00001a08  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    0000027b  00000000  00000000  00001b90  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    000004a1  00000000  00000000  00001e0b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 000000a0  00000000  00000000  000022ac  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+   8:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+   c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  10:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  14:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  18:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  1c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  20:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  24:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  28:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  2c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  30:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  34:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  38:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  3c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  40:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  44:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  48:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  4c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  50:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d4 e0       	ldi	r29, 0x04	; 4
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_clear_bss>:
+  60:	20 e0       	ldi	r18, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	01 c0       	rjmp	.+2      	; 0x6a <.do_clear_bss_start>
+
+00000068 <.do_clear_bss_loop>:
+  68:	1d 92       	st	X+, r1
+
+0000006a <.do_clear_bss_start>:
+  6a:	a1 36       	cpi	r26, 0x61	; 97
+  6c:	b2 07       	cpc	r27, r18
+  6e:	e1 f7       	brne	.-8      	; 0x68 <.do_clear_bss_loop>
+  70:	0e 94 91 00 	call	0x122	; 0x122 <main>
+  74:	0c 94 a0 00 	jmp	0x140	; 0x140 <_exit>
+
+00000078 <__bad_interrupt>:
+  78:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000007c <pin_write>:
+	return t;
+}
+
+void port_write (char base, char p )
+{
+	(*(volatile char*) (base+2)) = p ;
+  7c:	41 11       	cpse	r20, r1
+  7e:	0d c0       	rjmp	.+26     	; 0x9a <pin_write+0x1e>
+  80:	e8 2f       	mov	r30, r24
+  82:	f0 e0       	ldi	r31, 0x00	; 0
+  84:	22 81       	ldd	r18, Z+2	; 0x02
+  86:	81 e0       	ldi	r24, 0x01	; 1
+  88:	90 e0       	ldi	r25, 0x00	; 0
+  8a:	02 c0       	rjmp	.+4      	; 0x90 <pin_write+0x14>
+  8c:	88 0f       	add	r24, r24
+  8e:	99 1f       	adc	r25, r25
+  90:	6a 95       	dec	r22
+  92:	e2 f7       	brpl	.-8      	; 0x8c <pin_write+0x10>
+  94:	82 2b       	or	r24, r18
+  96:	82 83       	std	Z+2, r24	; 0x02
+  98:	08 95       	ret
+  9a:	e8 2f       	mov	r30, r24
+  9c:	f0 e0       	ldi	r31, 0x00	; 0
+  9e:	22 81       	ldd	r18, Z+2	; 0x02
+  a0:	81 e0       	ldi	r24, 0x01	; 1
+  a2:	90 e0       	ldi	r25, 0x00	; 0
+  a4:	02 c0       	rjmp	.+4      	; 0xaa <pin_write+0x2e>
+  a6:	88 0f       	add	r24, r24
+  a8:	99 1f       	adc	r25, r25
+  aa:	6a 95       	dec	r22
+  ac:	e2 f7       	brpl	.-8      	; 0xa6 <pin_write+0x2a>
+  ae:	80 95       	com	r24
+  b0:	82 23       	and	r24, r18
+  b2:	82 83       	std	Z+2, r24	; 0x02
+  b4:	08 95       	ret
+
+000000b6 <Casting>:
+}
+
+
+char Casting (int reg)
+{
+	return ( (*(volatile char*) reg));
+  b6:	fc 01       	movw	r30, r24
+  b8:	80 81       	ld	r24, Z
+  ba:	08 95       	ret
+
+000000bc <Lcd_Enable>:
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  bc:	41 e0       	ldi	r20, 0x01	; 1
+  be:	62 e0       	ldi	r22, 0x02	; 2
+  c0:	83 e3       	ldi	r24, 0x33	; 51
+  c2:	0e 94 3e 00 	call	0x7c	; 0x7c <pin_write>
+  c6:	00 00       	nop
+  c8:	40 e0       	ldi	r20, 0x00	; 0
+  ca:	62 e0       	ldi	r22, 0x02	; 2
+  cc:	83 e3       	ldi	r24, 0x33	; 51
+  ce:	0e 94 3e 00 	call	0x7c	; 0x7c <pin_write>
+  d2:	00 00       	nop
+  d4:	08 95       	ret
+
+000000d6 <Write_Data>:
+	t |= ( (Command << 4) & 0xf0);
+	Lcd_Enable();
+}
+
+void Write_Data(char Data)
+{ 
+  d6:	cf 93       	push	r28
+  d8:	c8 2f       	mov	r28, r24
+	pin_write (RS_RW_E_port, RS_bin ,1 );
+  da:	41 e0       	ldi	r20, 0x01	; 1
+  dc:	60 e0       	ldi	r22, 0x00	; 0
+  de:	83 e3       	ldi	r24, 0x33	; 51
+  e0:	0e 94 3e 00 	call	0x7c	; 0x7c <pin_write>
+	pin_write (RS_RW_E_port,RW_bin ,0 );
+  e4:	40 e0       	ldi	r20, 0x00	; 0
+  e6:	61 e0       	ldi	r22, 0x01	; 1
+  e8:	83 e3       	ldi	r24, 0x33	; 51
+  ea:	0e 94 3e 00 	call	0x7c	; 0x7c <pin_write>
+	
+	t = Casting (Data_port+2); 
+  ee:	82 e3       	ldi	r24, 0x32	; 50
+  f0:	90 e0       	ldi	r25, 0x00	; 0
+  f2:	0e 94 5b 00 	call	0xb6	; 0xb6 <Casting>
+	t &= 0x0f;
+  f6:	8f 70       	andi	r24, 0x0F	; 15
+	t |= (Data & 0xf0);
+  f8:	9c 2f       	mov	r25, r28
+  fa:	90 7f       	andi	r25, 0xF0	; 240
+  fc:	89 2b       	or	r24, r25
+  fe:	80 93 60 00 	sts	0x0060, r24
+	Lcd_Enable();
+ 102:	0e 94 5e 00 	call	0xbc	; 0xbc <Lcd_Enable>
+	t &= 0x0f;
+	t |= ( (Data << 4) & 0xf0);
+ 106:	20 e1       	ldi	r18, 0x10	; 16
+ 108:	c2 9f       	mul	r28, r18
+ 10a:	c0 01       	movw	r24, r0
+ 10c:	11 24       	eor	r1, r1
+	
+	t = Casting (Data_port+2); 
+	t &= 0x0f;
+	t |= (Data & 0xf0);
+	Lcd_Enable();
+	t &= 0x0f;
+ 10e:	90 91 60 00 	lds	r25, 0x0060
+ 112:	9f 70       	andi	r25, 0x0F	; 15
+	t |= ( (Data << 4) & 0xf0);
+ 114:	89 2b       	or	r24, r25
+ 116:	80 93 60 00 	sts	0x0060, r24
+	
+	Lcd_Enable();
+ 11a:	0e 94 5e 00 	call	0xbc	; 0xbc <Lcd_Enable>
+	
+}
+ 11e:	cf 91       	pop	r28
+ 120:	08 95       	ret
+
+00000122 <main>:
+#include <util/delay.h>
+
+
+int main(void)
+{
+	Lcd_Enable();
+ 122:	0e 94 5e 00 	call	0xbc	; 0xbc <Lcd_Enable>
+	Write_Data('n');
+ 126:	8e e6       	ldi	r24, 0x6E	; 110
+ 128:	0e 94 6b 00 	call	0xd6	; 0xd6 <Write_Data>
+ 12c:	2f ef       	ldi	r18, 0xFF	; 255
+ 12e:	89 e6       	ldi	r24, 0x69	; 105
+ 130:	98 e1       	ldi	r25, 0x18	; 24
+ 132:	21 50       	subi	r18, 0x01	; 1
+ 134:	80 40       	sbci	r24, 0x00	; 0
+ 136:	90 40       	sbci	r25, 0x00	; 0
+ 138:	e1 f7       	brne	.-8      	; 0x132 <main+0x10>
+ 13a:	00 c0       	rjmp	.+0      	; 0x13c <main+0x1a>
+ 13c:	00 00       	nop
+	_delay_ms(1000);
+	while (1)
+	{
+	}
+ 13e:	ff cf       	rjmp	.-2      	; 0x13e <main+0x1c>
+
+00000140 <_exit>:
+ 140:	f8 94       	cli
+
+00000142 <__stop_program>:
+ 142:	ff cf       	rjmp	.-2      	; 0x142 <__stop_program>
