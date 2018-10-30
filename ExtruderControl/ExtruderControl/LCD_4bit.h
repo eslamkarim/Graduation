@@ -14,7 +14,7 @@
 #define RS_bin 0
 #define RW_bin 1
 #define E_bin  2
-char t;
+char t; 
 
 
 void Lcd_Enable();

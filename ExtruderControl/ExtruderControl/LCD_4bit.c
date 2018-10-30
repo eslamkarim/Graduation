@@ -21,7 +21,7 @@ void Lcd_Enable()
 
 void Lcd_Init()
 {  
-    t = Casting (Data_port+2); 
+    t = Casting (Data_port+2);
 	port_direction (Data_port, output );
 	port_direction (RS_RW_E_port, output );
 	port_write (Data_port, 0x00 );

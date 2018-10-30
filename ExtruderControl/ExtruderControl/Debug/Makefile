@@ -37,8 +37,6 @@ SUBDIRS :=
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
-../Gpio.c \
-../LCD_4bit.c \
 ../main.c
 
 
@@ -49,23 +47,15 @@ ASM_SRCS +=
 
 
 OBJS +=  \
-Gpio.o \
-LCD_4bit.o \
 main.o
 
 OBJS_AS_ARGS +=  \
-Gpio.o \
-LCD_4bit.o \
 main.o
 
 C_DEPS +=  \
-Gpio.d \
-LCD_4bit.d \
 main.d
 
 C_DEPS_AS_ARGS +=  \
-Gpio.d \
-LCD_4bit.d \
 main.d
 
 OUTPUT_FILE_PATH +=ExtruderControl.elf
@@ -82,10 +72,6 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
-
-
-
-
 
 
 

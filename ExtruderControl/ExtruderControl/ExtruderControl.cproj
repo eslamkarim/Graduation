@@ -118,18 +118,6 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Gpio.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Gpio.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="LCD_4bit.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="LCD_4bit.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>

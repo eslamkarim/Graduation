@@ -15,9 +15,7 @@
 
 int main(void)
 {
-	Lcd_Enable();
-	Write_Data('n');
-	_delay_ms(1000);
+	
 	while (1)
 	{
 	}

@@ -2,9 +2,5 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
-Gpio.c
-
-LCD_4bit.c
-
 main.c
 
