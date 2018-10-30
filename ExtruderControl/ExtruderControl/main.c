@@ -17,7 +17,7 @@ char S [4];                           //store the temp that convert to string to
 
 int main(void)
 {
-    DDRB = 0xFF;                   //Port B is output
+    DDRB = 0xFF;                  //Port B is output
 	DDRA &=~ (1<<1);              //port A bin 0 is input
 	Lcd4_Init();
     ADC_INIT ();
