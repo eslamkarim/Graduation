@@ -229,7 +229,7 @@ void steper_Sstep(){// to make a Sixteenth 1 step with 4w1-2 phase ms1 = 1,ms2 =
 	STpinChange(ms3,1);
 }
 //library interface description
-void StepperInit(int steps,uint8_t sp)  //types of steps (1,2,6,8,16),speed of rotation in rpm
+void StepperInit(int steps,int16_t sp)  //types of steps (1,2,6,8,16),speed of rotation in rpm
 {
 	switch (steps){
 		case 1:steper_1step();break;
@@ -243,7 +243,7 @@ void StepperInit(int steps,uint8_t sp)  //types of steps (1,2,6,8,16),speed of r
 void setspeed(int sp){
 	sp=(1/(sp/60))*1000;//1Hz = 60 rpm & t = 1/f &1s = 1000ms
 	while(sp > 0){
-		_delay_us(1);
+		_delay_ms(1);
 		sp-=1;
 	}
 }
@@ -257,7 +257,7 @@ void Stepper_A_rev(bool clockw,uint8_t NuOfSteps){//rotate clockwise or ccw , nu
 		STpinChange(DIRA,0);
 	}
 	
-	while (NuOfSteps != 0)
+	while (NuOfSteps > 0)
 	{
 		STpinChange(StepA,1);
 		setspeed(speed); 
