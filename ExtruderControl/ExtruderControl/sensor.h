@@ -9,7 +9,7 @@
 #ifndef SENSOR_H_
 #define SENSOR_H_
 #define P 10/1000         //volt per temperature
-#define NOS_VR 1024/5    //number of steps per v ref
+#define NOS_VR 1024/2.56    //number of steps per v ref
 #include <avr/io.h>
 
 void ADC_INIT ();
