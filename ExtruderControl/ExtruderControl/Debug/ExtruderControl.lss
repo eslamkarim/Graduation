@@ -660,7 +660,7 @@ char S [4];                           //store the temp that convert to string to
 
 int main(void)
 {
-    DDRB = 0xFF;                  //Port B is output
+    DDRB = 0xFF;                   //Port B is output
  512:	8f ef       	ldi	r24, 0xFF	; 255
  514:	87 bb       	out	0x17, r24	; 23
 	DDRA &=~ (1<<1);              //port A bin 0 is input
