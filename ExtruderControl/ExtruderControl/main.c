@@ -31,9 +31,10 @@ int main(void)
 		if (status && ADC_value(0)>=27) // if start button is pressed and the temperature is 27 or greater the stepper is started
 		{
 			ADC_value(1);
-			if (stspeed != ADC)
+			int ADC_speed = ADC*(0.0978);
+			if (stspeed != ADC_speed)
 			{
-				stspeed = ADC;// to make the change of speed from 0 to 1023
+				stspeed = ADC_speed;// to make the change of speed from 0 to 100 mm/s
 				Lcd4_Clear();
 				itoa(stspeed, output, 10);// convert the value from integer to string to display
 				Lcd4_Set_Cursor(1,1);

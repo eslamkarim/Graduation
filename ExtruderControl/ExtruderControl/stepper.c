@@ -13,7 +13,7 @@
 #include<util/delay.h>
 #include <avr/io.h>
 #include <stdbool.h>
-int speed = 0;
+int speed;
 void STpinChange(int a, int b)
 {
 	if(b == 0)
@@ -241,7 +241,7 @@ void StepperInit(int steps,int16_t sp)  //types of steps (1,2,6,8,16),speed of r
 	speed = sp;
 }
 void setspeed(int sp){
-	sp=(1/(sp/60))*1000;//1Hz = 60 rpm & t = 1/f &1s = 1000ms
+	sp=(1000/sp);//1step = 1 mm 
 	while(sp > 0){
 		_delay_ms(1);
 		sp-=1;
@@ -260,7 +260,7 @@ void Stepper_A_rev(bool clockw,uint8_t NuOfSteps){//rotate clockwise or ccw , nu
 	while (NuOfSteps > 0)
 	{
 		STpinChange(StepA,1);
-		setspeed(speed); 
+		_delay_ms(1); 
 		STpinChange(StepA,0);
 		setspeed(speed);
 		NuOfSteps -= 1;
@@ -279,7 +279,7 @@ void Stepper_B_rev(bool clockw,uint8_t NuOfSteps){//rotate clockwise or ccw , nu
 	while (NuOfSteps != 0)
 	{
 		STpinChange(StepB,1);
-		setspeed(speed); //1Hz = 60 rpm & t = 1/f &1s = 1000ms
+		_delay_ms(1); //1Hz = 60 rpm & t = 1/f &1s = 1000ms
 		STpinChange(StepB,0);
 		setspeed(speed);
 		NuOfSteps -= 1;
@@ -298,7 +298,7 @@ void Stepper_C_rev(bool clockw,uint8_t NuOfSteps){//rotate clockwise or ccw , nu
 	while (NuOfSteps != 0)
 	{
 		STpinChange(StepC,1);
-		setspeed(speed); //1Hz = 60 rpm & t = 1/f &1s = 1000ms
+		_delay_ms(1); //1Hz = 60 rpm & t = 1/f &1s = 1000ms
 		STpinChange(StepC,0);
 		setspeed(speed);
 		NuOfSteps -= 1;
@@ -317,7 +317,7 @@ void Stepper_D_rev(bool clockw,uint8_t NuOfSteps){//rotate clockwise or ccw , nu
 	while (NuOfSteps != 0)
 	{
 		STpinChange(StepD,1);
-		setspeed(speed); //1Hz = 60 rpm & t = 1/f &1s = 1000ms
+		_delay_ms(1); //1Hz = 60 rpm & t = 1/f &1s = 1000ms
 		STpinChange(StepD,0);
 		setspeed(speed);
 		NuOfSteps -= 1;
