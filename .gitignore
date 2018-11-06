@@ -104,3 +104,13 @@ ENV/
 .idea/modules.xml
 .idea/vcs.xml
 .idea/workspace.xml
+*.o
+*.d
+ExtruderControl/ExtruderControl/Debug/ExtruderControl.hex
+ExtruderControl/ExtruderControl/Debug/ExtruderControl.lss
+ExtruderControl/ExtruderControl/Debug/ExtruderControl.map
+ExtruderControl/ExtruderControl/Debug/ExtruderControl.srec
+ExtruderControl/ExtruderControl/Debug/makedep.mk
+ExtruderControl/ExtruderControl/Debug/Makefile
+
+*.cproj
