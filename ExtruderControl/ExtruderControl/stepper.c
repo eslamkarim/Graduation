@@ -229,7 +229,7 @@ void steper_Sstep(){// to make a Sixteenth 1 step with 4w1-2 phase ms1 = 1,ms2 =
 	STpinChange(ms3,1);
 }
 //library interface description
-void StepperInit(int steps,int16_t sp)  //types of steps (1,2,6,8,16),speed of rotation in rpm
+void StepperInit(int steps,int16_t sp)  //types of steps (1,2,6,8,16),speed of rotation in mm/s
 {
 	switch (steps){
 		case 1:steper_1step();break;
